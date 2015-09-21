@@ -1,3 +1,4 @@
+// Generated with jpm init
 //var self = require('sdk/self');
 //
 //// a dummy function, to show how tests work.
@@ -35,21 +36,15 @@ if (!simpleStorage.storage.tags)
   simpleStorage.storage.tags = {1091838: 'cool guy'};
 
 pageMod.PageMod({
-//  include: "*://www.strava.com/*",
+  // Regex! The wildcard is useless
   include: /.*strava.*/,
   contentScriptFile: ["./jquery-2.1.4.min.js", "./strava.js"],
-  contentScript: 'loadTags(' + JSON.stringify(simpleStorage.storage.tags) +')'
+  onAttach: function(worker) {
+    // Message to content script
+    worker.port.emit("currentTags", simpleStorage.storage.tags);
+    // Message from content script
+    worker.port.on("newTag", function(newTag) {
+      console.log("Tag received", newTag);
+    });
+  }
 });
-
-
-//// Import the page-mod API
-//var pageMod = require("sdk/page-mod");
-// 
-//// Create a page-mod
-//// It will run a script whenever a ".org" URL is loaded
-//// The script replaces the page contents with a message
-//pageMod.PageMod({
-//  include: /.*strava.com.*/,
-//  contentScript: 'document.body.innerHTML = ' +
-//                 ' "<h1>Page matches ruleset</h1>";'
-//});
