@@ -1,0 +1,13 @@
+{
+  "title": "stravaTag",
+  "name": "stravatag",
+  "version": "0.0.1",
+  "description": "Firefox copy of stravaTag by /u/unicycling_dinosaur on /r/running",
+  "main": "index.js",
+  "author": "Ward Muylaert",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT"
+}
