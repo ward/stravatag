@@ -9,6 +9,7 @@ function loadTags(items) {
   }
 
   var allTags = items;
+  //console.log(allTags);
 
   //add tag to the user's page
   if (window.location.href.indexOf(".com/athletes/") > -1) {
@@ -43,7 +44,6 @@ function loadTags(items) {
 
       //iterate over tags
       for (var tag in allTags) {
-        //console.log(tag);
         //if our guy, tag
         if (urls[i].hasAttribute("href"))
           if (urls[i].getAttribute("href").indexOf(tag) > -1){
@@ -61,7 +61,7 @@ function loadTags(items) {
       curLength=$(toTag).length;
       mapTags();
     }
-  },100);
+  },1000);
 
 }
 

@@ -1,5 +1,5 @@
 {
-  "title": "stravaTag",
+  "title": "stravatag",
   "name": "stravatag",
   "version": "0.0.1",
   "description": "Firefox copy of stravaTag by /u/unicycling_dinosaur on /r/running",
@@ -9,5 +9,5 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "MIT"
+  "license": "Do what you want"
 }
