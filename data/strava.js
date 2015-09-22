@@ -1,4 +1,4 @@
-var toTag = ".athlete-name.minimal, .athlete-name, .minimal"; //classes to tag
+var toTag = ".athlete-name.minimal, .athlete-name, .minimal, td.name>a"; //classes to tag
 
 function loadTags(items) {
   function addTag(ele, tag) {
