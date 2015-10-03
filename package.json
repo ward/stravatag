@@ -9,5 +9,13 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "Do what you want"
+  "license": "Do what you want",
+  "preferences": [
+    {
+      "name": "listPref",
+      "title": "List connections",
+      "label": "List...",
+      "type": "control"
+    }
+  ]
 }
