@@ -37,6 +37,11 @@ function connectRedditStrava(connection) {
   simpleStorage.storage.redditstrava[connection.strava] = connection.reddit;
 }
 
+function disconnectRedditStrava(connection) {
+  console.log('Delete connection', connection);
+  delete simpleStorage.storage.redditstrava[connection.strava];
+}
+
 /**
  * Modifies Strava pages
  */
@@ -47,6 +52,7 @@ pageMod.PageMod({
   onAttach: function(worker) {
     // Message to content script
     worker.port.emit('currentTags', simpleStorage.storage.tags);
+    worker.port.emit('currentconnections', simpleStorage.storage.redditstrava);
     // Message from content script
     worker.port.on('newTag', newTag);
   }
@@ -62,7 +68,8 @@ require('sdk/simple-prefs').on('listPref', showConnections);
 // The pop up showing the current connections
 var connectionPopup = require('sdk/panel').Panel({
   contentURL: './connectionpopup.html',
-  contentScriptFile: ['./connectionpopup.js']
+  contentScriptFile: ['./connectionpopup.js'],
+  width: 600,
 });
 // show event is on this end, send over the current connections when this happens
 connectionPopup.on('show', function() {
@@ -73,5 +80,11 @@ connectionPopup.on('show', function() {
 // When receiving a new connection, save it and send updated connection list back
 connectionPopup.port.on('newConnection', function(obj) {
   connectRedditStrava(obj);
+  connectionPopup.port.emit('currentconnections', simpleStorage.storage.redditstrava);
+});
+// When receiving a delete connection, remove the entry and send updated
+// connection list back.
+connectionPopup.port.on('deleteConnection', function(obj) {
+  disconnectRedditStrava(obj);
   connectionPopup.port.emit('currentconnections', simpleStorage.storage.redditstrava);
 });

@@ -10,10 +10,17 @@ function fillTable(connections) {
     output += reddit;
     output += '</td><td>';
     output += strava;
+    output += '</td><td>';
+    output += '<a>x</a>';
     output += '</td></tr>';
     newbody += output;
   }
   tbody.innerHTML = newbody;
+
+  var as = document.getElementsByTagName('a');
+  for (var i = 0; i < as.length; i++) {
+    as[i].addEventListener('click', handleDeleteConnection);
+  }
 }
 
 /**
@@ -29,6 +36,15 @@ function handleNewConnection() {
   // TODO: Data validation
   self.port.emit('newConnection', {reddit: reddit, strava: strava});
 }
+
+function handleDeleteConnection(e) {
+  var tr = e.target.parentNode.parentNode;
+  var tds = tr.getElementsByTagName('td');
+  var reddit = tds[0].innerHTML;
+  var strava = tds[1].innerHTML;
+  self.port.emit('deleteConnection', {reddit: reddit, strava: strava});
+}
+
 // Connect it up (13 is enter)
 document.getElementById('newreddit').addEventListener('keyup', function(evt) {
   if (evt.keyCode === 13) {
