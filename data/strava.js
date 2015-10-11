@@ -69,3 +69,34 @@ function loadTags(items) {
 self.port.on("currentTags", function(tags) {
   loadTags(tags);
 });
+
+self.port.on('currentconnections', function(connections) {
+  loadConnections(connections)
+});
+
+function loadConnections(connections) {
+  var linksToAthlete = function(url, stravaid) {
+    return url.hasAttribute('href') && url.getAttribute('href').indexOf(stravaid) > -1;
+  };
+  var isTagged = function(url, reddituser) {
+    return false; // TODO
+  };
+  var addTag = function(url, reddituser) {
+    var nextsib = url.nextSibling;
+    var dad = url.parentNode;
+    var redditlink = document.createElement('a');
+    redditlink.href = 'https://www.reddit.com/u/' + reddituser;
+    redditlink.textContent = '/u/' + reddituser;
+    dad.insertBefore(redditlink, nextsib);
+  };
+  var urls = document.querySelectorAll(toTag);
+  for (var i = 0; i < urls.length; i++) {
+    for (var connection in connections) {
+      if (linksToAthlete(urls[i], connection)) {
+        if (! isTagged(urls[i], connections[connection])) {
+          addTag(urls[i], connections[connection]);
+        }
+      }
+    }
+  }
+}

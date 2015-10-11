@@ -8,7 +8,8 @@ if (!simpleStorage.storage.tags) {
 // Format of stravaid => redditusername
 if (!simpleStorage.storage.redditstrava) {
   simpleStorage.storage.redditstrava = {
-    1091838: 'wardmuylaert'
+    1091838: 'wardmuylaert',
+    2232601: 'Jaime_Manger'
   };
 }
 
