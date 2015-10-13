@@ -58,6 +58,18 @@ pageMod.PageMod({
     worker.port.on('newTag', newTag);
   }
 });
+/**
+ * Modifies reddit pages
+ */
+pageMod.PageMod({
+  include: /^https?:\/\/www\.reddit\.com.*$/,
+  contentScriptFile: ['./reddit.js'],
+  contentStyleFile: ['./reddit.css'],
+  onAttach: function(worker) {
+    // Message to content script
+    worker.port.emit('currentconnections', simpleStorage.storage.redditstrava);
+  }
+});
 
 
 function showConnections() {
