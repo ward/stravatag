@@ -1,4 +1,4 @@
-var toTag = ".athlete-name.minimal, .athlete-name, .minimal, td.name>a"; //classes to tag
+var toTag = ".athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
 
 function loadTags(items) {
   function addTag(ele, tag) {
@@ -86,7 +86,7 @@ function loadConnections(connections) {
     var dad = url.parentNode;
     var redditlink = document.createElement('a');
     redditlink.href = 'https://www.reddit.com/u/' + reddituser;
-    redditlink.textContent = '/u/' + reddituser;
+    redditlink.textContent = ' (/u/' + reddituser + ')';
     dad.insertBefore(redditlink, nextsib);
   };
   var urls = document.querySelectorAll(toTag);
