@@ -79,7 +79,7 @@ function loadConnections(connections) {
     return url.hasAttribute('href') && url.getAttribute('href').indexOf(stravaid) > -1;
   };
   var isTagged = function(url, reddituser) {
-    return false; // TODO
+    return url.classList.contains('reddittagged');
   };
   var addTag = function(url, reddituser) {
     var nextsib = url.nextSibling;
@@ -88,15 +88,28 @@ function loadConnections(connections) {
     redditlink.href = 'https://www.reddit.com/u/' + reddituser;
     redditlink.textContent = ' (/u/' + reddituser + ')';
     dad.insertBefore(redditlink, nextsib);
+    url.classList.add('reddittagged');
   };
-  var urls = document.querySelectorAll(toTag);
-  for (var i = 0; i < urls.length; i++) {
-    for (var connection in connections) {
-      if (linksToAthlete(urls[i], connection)) {
-        if (! isTagged(urls[i], connections[connection])) {
-          addTag(urls[i], connections[connection]);
+  var mapTags = function() {
+    var urls = document.querySelectorAll(toTag);
+    for (var i = 0; i < urls.length; i++) {
+      for (var connection in connections) {
+        if (linksToAthlete(urls[i], connection)) {
+          if (! isTagged(urls[i], connections[connection])) {
+            addTag(urls[i], connections[connection]);
+          }
         }
       }
     }
   }
+
+  // check every second whether there is a need to tag
+  var elementCount = 0;
+  setInterval(function() {
+    var currCount = document.querySelectorAll(toTag).length;
+    if (elementCount !== currCount) {
+      elementCount = currCount;
+      mapTags();
+    }
+  }, 1000);
 }
