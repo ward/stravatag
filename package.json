@@ -1,15 +1,15 @@
 {
   "title": "stravatag",
   "name": "stravatag",
-  "version": "0.1.1",
-  "description": "Firefox copy of stravaTag by /u/unicycling_dinosaur on /r/running",
+  "version": "0.2.0",
+  "description": "Connect someone's reddit account to their strava account for your ease.",
   "main": "index.js",
   "author": "Ward Muylaert",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "Do what you want",
+  "license": "MIT",
   "preferences": [
     {
       "name": "listPref",
