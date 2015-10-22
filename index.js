@@ -86,7 +86,6 @@ var connectionPopup = require('sdk/panel').Panel({
 });
 // show event is on this end, send over the current connections when this happens
 connectionPopup.on('show', function() {
-  console.log('connectionPopup shown');
   connectionPopup.port.emit('currentconnections', simpleStorage.storage.redditstrava);
 });
 
@@ -101,3 +100,53 @@ connectionPopup.port.on('deleteConnection', function(obj) {
   disconnectRedditStrava(obj);
   connectionPopup.port.emit('currentconnections', simpleStorage.storage.redditstrava);
 });
+
+
+/**
+ * Exporting of the current connections
+ */
+function handleExport() {
+  // Get only pathFor from sdk/system
+  const { pathFor } = require('sdk/system');
+  const path = require('sdk/fs/path');
+  const file = require('sdk/io/file');
+  // Writing to the default download directory, see
+  // https://developer.mozilla.org/en-US/Add-ons/Code_snippets/File_I_O#Getting_files_in_special_directories
+  // for full list of possibilities
+  var filename = path.join(pathFor('DfltDwnld'), 'stravatag.json');
+  var f = file.open(filename, 'w');
+  f.write(JSON.stringify(simpleStorage.storage.redditstrava, null, '\t'));
+  f.close();
+}
+require('sdk/simple-prefs').on('exportPref', handleExport);
+
+/**
+ * And importing
+ */
+function handleImport() {
+  const filepicker = require('./lib/filepicker.js');
+  let path = filepicker.promptForFile();
+  if (path !== undefined) {
+    const file = require('sdk/io/file');
+    let f = file.open(path, 'r');
+    let imported = JSON.parse(f.read());
+    for (var stravaid in imported) {
+      simpleStorage.storage.redditstrava[stravaid] = imported[stravaid];
+    }
+    f.close();
+  }
+}
+require('sdk/simple-prefs').on('importPref', handleImport);
+
+/**
+ * Clearing
+ */
+function handleClearAll() {
+  var {Cu, Ci} = require('chrome');
+  Cu.import('resource://gre/modules/Services.jsm');
+  var doit = Services.prompt.confirm(null, 'Remove all connections?', 'If you go through with this action, all the existing connections will be removed. This operation cannot be undone. Are you sure?');
+  if (doit) {
+    simpleStorage.storage.redditstrava = {};
+  }
+}
+require('sdk/simple-prefs').on('clearAllPref', handleClearAll);
