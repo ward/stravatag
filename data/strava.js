@@ -59,16 +59,22 @@ function loadAthleteConnection(connections) {
       }
     }
     if (reddituser !== null) {
-      var desc = document.getElementsByClassName("description")[0];
-      var name = desc.getElementsByTagName("h3")[0];
-      // Create the element
-      var taghead = document.createElement('h6');
+      // Create elements with the reddit user link
+      var tagdiv = document.createElement('div');
+      // Abuse the existing class
+      tagdiv.classList.add('location');
+      var tagimage = document.createElement('div');
+      tagimage.classList.add('app-icon', 'icon-group', 'icon-xs', 'mr-sm');
+      tagdiv.appendChild(tagimage);
       var taglink = document.createElement('a');
       taglink.href = 'https://www.reddit.com/u/' + reddituser;
       taglink.textContent = '/u/' + reddituser;
-      taghead.appendChild(taglink);
-      // Inserts after name
-      desc.insertBefore(taghead, name.nextSibling);
+      tagdiv.appendChild(taglink);
+
+      // Add before location
+      var locationdiv = document.getElementsByClassName("location")[0];
+      var surroundingdiv = locationdiv.parentNode;
+      surroundingdiv.insertBefore(tagdiv, locationdiv);
     }
   }
 }
