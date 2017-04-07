@@ -24,13 +24,23 @@ your main profile)
 
     jpm run
 
-though on my system I had to specify the firefox path
+though on my Linux system at the time I had to specify the firefox path
 
     jpm run -b /usr/bin/firefox
 
-Create an xpi for distribution with
+Recent times has forced add-on signing so this will probably still fail.
+Instead, I had to download an [unbranded version of
+Firefox](https://wiki.mozilla.org/Add-ons/Extension_Signing). After installing,
+the following made things work on macos
+
+    jpm run -b /Applications/Nightly.app
+
+Actually building an xpi for distribution is done with
 
     jpm xpi
+
+Note that you then probably want to go through the trouble of signing it via
+Mozilla's add-on website so it can actually be distributed.
 
 # Usage
 

@@ -1,4 +1,4 @@
-var toTag = ".athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
+var toTag = ".entry-athlete, .athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
 
 self.port.on('currentconnections', function(connections) {
   loadConnections(connections);
