@@ -1,16 +1,16 @@
 var toTag = ".entry-athlete, .athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
 
-var data = {
-  1091838: 'wardmuylaert',
-  2232601: 'Jaime_Manger',
-  7143188: 'TESTTEST'
-};
-var savingpromise = browser.storage.local.set(data);
-savingpromise.then(function() {
-  console.log('Saved successfully');
-}, function(err) {
-  console.log('SHIT FAILED');
-});
+function debug_default() {
+  var data = {
+    1091838: 'wardmuylaert',
+  };
+  var savingpromise = browser.storage.local.set(data);
+  savingpromise.then(function() {
+  }, function(err) {
+    // Ignore it if default setting of a username fails.
+  });
+}
+//debug_default()
 var alldatapromise = browser.storage.local.get(null);
 alldatapromise.then(function(res) {
   console.log(res);

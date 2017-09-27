@@ -44,12 +44,11 @@ function loadConnections(connections) {
   }, 1000);
 }
 
-//self.port.on('currentconnections', loadConnections);
-
 var alldatapromise = browser.storage.local.get(null);
 alldatapromise.then(function(res) {
   console.log('reddit, loading', res);
   loadConnections(res);
 }, function(err) {
   console.log('reddit, loading data failed!');
+  console.log(err);
 });

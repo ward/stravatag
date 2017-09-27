@@ -1,10 +1,13 @@
 {
   "manifest_version": 2,
   "name": "Stravatag",
+  "description": "Connect Reddit and Strava accounts",
   "version": "0.3",
-
-  "description": "",
-
+  "developer": {
+    "name": "Ward Muylaert",
+    "url": "https://github.com/ward/stravatag"
+  },
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["*://*.strava.com/*"],
@@ -12,22 +15,12 @@
     },
     {
       "matches": ["*://*.reddit.com/*"],
-      "js": [
-        "content_scripts/reddit.js"
-      ],
-      "css": [
-        "content_scripts/reddit.css"
-      ]
+      "js": ["content_scripts/reddit.js"],
+      "css": ["content_scripts/reddit.css"]
     }
   ],
-
-  "permissions": [
-    "storage"
-  ],
-
   "options_ui": {
     "page": "options/options.html",
     "browser_style": true
   }
-
 }
