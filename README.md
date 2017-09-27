@@ -12,45 +12,15 @@ Get the xpi file from the
 top of Firefox if all else fails. You may need to change your configuration to
 allow unsigned addons.
 
-# Build
-
-If you want to build things yourself from the repository, you will need `jpm`.
-Install with
-
-    npm install jpm --global
-
-Run as a test with (note this creates a fresh temporary profile to not ruin
-your main profile)
-
-    jpm run
-
-though on my Linux system at the time I had to specify the firefox path
-
-    jpm run -b /usr/bin/firefox
-
-Recent times has forced add-on signing so this will probably still fail.
-Instead, I had to download an [unbranded version of
-Firefox](https://wiki.mozilla.org/Add-ons/Extension_Signing). After installing,
-the following made things work on macos
-
-    jpm run -b /Applications/Nightly.app
-
-Actually building an xpi for distribution is done with
-
-    jpm xpi
-
-Note that you then probably want to go through the trouble of signing it via
-Mozilla's add-on website so it can actually be distributed.
-
 # Usage
 
 Connections are managed through the preferences page of this addon. You can
 find this in `about:addons`. This is done deliberately, I do not see a point in
 yet another constant icon for a feature that is mostly passive.
 
-Adding and viewing of connections is done by clicking on the `List...` button.
-Fill in the reddit account name and the strava athlete id. Follow it up by
-pressing enter to store the connection.
+Adding and viewing of connections is done in that same preferences page.  Fill
+in the reddit account name and the strava athlete id. Follow it up by pressing
+enter to store the connection.
 
 You may export and import connections. This is done via the JSON format.
 Importing will leave your existing connections untouched except for those which

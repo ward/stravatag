@@ -1,9 +1,22 @@
 var toTag = ".entry-athlete, .athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
 
-self.port.on('currentconnections', function(connections) {
-  loadConnections(connections);
-  loadAthleteConnection(connections);
-});
+function debug_default() {
+  var data = {
+    1091838: 'wardmuylaert',
+  };
+  var savingpromise = browser.storage.local.set(data);
+  savingpromise.then(function() {
+  }, function(err) {
+    // Ignore it if default setting of a username fails.
+  });
+}
+//debug_default()
+var alldatapromise = browser.storage.local.get(null);
+alldatapromise.then(function(res) {
+  console.log(res);
+  loadConnections(res);
+  loadAthleteConnection(res);
+}, function(err) { console.log(err); });
 
 function loadConnections(connections) {
   var linksToAthlete = function(url, stravaid) {

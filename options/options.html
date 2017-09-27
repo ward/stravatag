@@ -1,0 +1,42 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <table id="connections">
+      <thead>
+        <tr>
+          <th>
+            Reddit
+          </th>
+          <th>
+            Strava
+          </th>
+          <th>
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td class="browser-style">
+            <input type="text" id="newreddit" placeholder="Reddit username" />
+          </td>
+          <td class="browser-style">
+            <input type="text" id="newstrava"  placeholder="Strava (numeric) id"/>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody id="connectionsBody">
+      </tbody>
+    </table>
+    <hr style="width: 100%;" />
+    <p>You can export or import your data through the field below. To export, press the export button and save the contents of the text field in a file of your choice. To import, copy paste the data from an export into the text field and press the import button.</p>
+    <button id="export" class="browser-style">Export</button>
+    <button id="import" class="browser-style">Import</button>
+    <textarea id="rawfield" class="browser-style" placeholder="Field for raw export and importing"></textarea>
+    <hr style="width: 100%;" />
+    <button id="deleteall" class="browser-style">Delete All</button>
+  <script src="options.js">
+  </script>
+  </body>
+</html>
