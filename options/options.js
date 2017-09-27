@@ -68,3 +68,33 @@ browser.storage.onChanged.addListener(function(changes, area) {
   var connections_p = browser.storage.local.get(null);
   connections_p.then(fillTable, function(err) { console.log(err); });
 });
+
+
+document.getElementById('export').addEventListener('click', function(evt) {
+  let alldatapromise = browser.storage.local.get(null);
+  alldatapromise.then(function(res) {
+    document.getElementById('rawfield').value = JSON.stringify(res);
+  }, function(err) {
+    console.log(err);
+  });
+});
+document.getElementById('import').addEventListener('click', function(evt) {
+  let newdata = JSON.parse(document.getElementById('rawfield').value);
+  let savingpromise = browser.storage.local.set(newdata);
+  savingpromise.then(function() {
+    console.log('New data saved.');
+  }, function(err) {
+    console.log('Something went wrong importing data');
+    console.log(err);
+  });
+});
+
+document.getElementById('deleteall').addEventListener('click', function(evt) {
+  let clearpromise = browser.storage.local.clear();
+  clearpromise.then(function() {
+    console.log('All data cleared.');
+  }, function(err) {
+    console.log('Something went wrong clearing all data');
+    console.log(err);
+  });
+});
