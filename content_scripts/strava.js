@@ -1,9 +1,5 @@
 var toTag = ".entry-athlete, .athlete-name.minimal, .athlete-name, .minimal, td.name>a, li>div.h4.topless>a"; //classes to tag
 
-//self.port.on('currentconnections', function(connections) {
-//  loadConnections(connections);
-//  loadAthleteConnection(connections);
-//});
 var data = {
   1091838: 'wardmuylaert',
   2232601: 'Jaime_Manger',
