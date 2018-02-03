@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Stravatag",
   "description": "Connect Reddit and Strava accounts",
-  "version": "0.3",
+  "version": "0.3.1",
   "developer": {
     "name": "Ward Muylaert",
     "url": "https://github.com/ward/stravatag"
